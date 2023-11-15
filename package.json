@@ -13,6 +13,8 @@
     "android",
     "ios",
     "cpp",
+    "libsodium",
+    "!libsodium/build",
     "*.podspec",
     "!ios/build",
     "!android/build",
@@ -27,11 +29,13 @@
   ],
   "scripts": {
     "example": "yarn workspace sodium-react-native-example",
+    "build:libsodium": "./libsodium/build.sh",
     "test": "jest",
     "typecheck": "tsc --noEmit",
     "lint": "eslint \"**/*.{js,ts,tsx}\"",
     "clean": "del-cli android/build example/android/build example/android/app/build example/ios/build lib",
     "prepare": "bob build",
+    "postinstall": "tar -xzf libsodium/build.tgz --directory ./libsodium",
     "release": "release-it"
   },
   "keywords": [
