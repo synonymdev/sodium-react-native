@@ -3157,6 +3157,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/b4a@npm:^1.6.3":
+  version: 1.6.3
+  resolution: "@types/b4a@npm:1.6.3"
+  dependencies:
+    "@types/node": "*"
+  checksum: 8f98b64f4c7faf9114ac9a5be0cb72ff841487fecc7923467323592fbcfceef3b602026377d4540f7481243796ac0e033cf21fde404598097593705d4981a617
+  languageName: node
+  linkType: hard
+
 "@types/babel__core@npm:^7.1.14":
   version: 7.20.4
   resolution: "@types/babel__core@npm:7.20.4"
@@ -3953,6 +3962,13 @@ __metadata:
   version: 1.0.5
   resolution: "available-typed-arrays@npm:1.0.5"
   checksum: 20eb47b3cefd7db027b9bbb993c658abd36d4edd3fe1060e83699a03ee275b0c9b216cc076ff3f2db29073225fb70e7613987af14269ac1fe2a19803ccc97f1a
+  languageName: node
+  linkType: hard
+
+"b4a@npm:^1.6.4":
+  version: 1.6.4
+  resolution: "b4a@npm:1.6.4"
+  checksum: 81b086f9af1f8845fbef4476307236bda3d660c158c201db976f19cdce05f41f93110ab6b12fd7a2696602a490cc43d5410ee36a56d6eef93afb0d6ca69ac3b2
   languageName: node
   linkType: hard
 
@@ -11924,6 +11940,8 @@ __metadata:
     "@babel/preset-env": ^7.20.0
     "@babel/runtime": ^7.20.0
     "@react-native/metro-config": ^0.72.11
+    "@types/b4a": ^1.6.3
+    b4a: ^1.6.4
     babel-plugin-module-resolver: ^5.0.0
     metro-react-native-babel-preset: 0.76.8
     pod-install: ^0.1.0
