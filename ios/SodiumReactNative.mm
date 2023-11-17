@@ -73,6 +73,7 @@ RCT_EXPORT_MODULE()
     @"crypto_kdf_CONTEXTBYTES": @ crypto_kdf_CONTEXTBYTES,
     @"crypto_kx_PUBLICKEYBYTES": @ crypto_kx_PUBLICKEYBYTES,
     @"crypto_kx_SECRETKEYBYTES": @ crypto_kx_SECRETKEYBYTES,
+    @"crypto_kx_SEEDBYTES": @ crypto_kx_SEEDBYTES,
     @"crypto_onetimeauth_BYTES": @ crypto_onetimeauth_BYTES,
     @"crypto_onetimeauth_KEYBYTES": @ crypto_onetimeauth_KEYBYTES,
     @"crypto_pwhash_BYTES_MIN": @ crypto_pwhash_BYTES_MIN,
@@ -871,10 +872,24 @@ RCT_EXPORT_BLOCKING_SYNCHRONOUS_METHOD(
   crypto_kx_keypair:(NSArray *) pk
                     sk: (NSArray *) sk)
 {
-  RN_RESULT_BUFFER(pk, crypto_secretstream_xchacha20poly1305_KEYBYTES, ERR_BAD_KEY)
-  RN_RESULT_BUFFER(sk, crypto_secretstream_xchacha20poly1305_KEYBYTES, ERR_BAD_KEY)
+  RN_RESULT_BUFFER(pk, crypto_kx_PUBLICKEYBYTES, ERR_BAD_KEY)
+  RN_RESULT_BUFFER(sk, crypto_kx_SECRETKEYBYTES, ERR_BAD_KEY)
 
   crypto_kx_keypair(pk_data, sk_data);
+
+  RN_RETURN_BUFFERS_2(pk, sk, sklen)
+}
+
+RCT_EXPORT_BLOCKING_SYNCHRONOUS_METHOD(
+  crypto_kx_seed_keypair:(NSArray *) pk
+                    sk: (NSArray *) sk
+                    seed: (NSArray *) seed)
+{
+  RN_RESULT_BUFFER(pk, crypto_kx_PUBLICKEYBYTES, ERR_BAD_KEY)
+  RN_RESULT_BUFFER(sk, crypto_kx_SECRETKEYBYTES, ERR_BAD_KEY)
+  RN_ARG_UCONST_BUFFER(seed, crypto_kx_SEEDBYTES, ERR_BAD_SEED)
+
+  RN_CHECK_FAILURE(crypto_kx_seed_keypair(pk_data, sk_data, seed_data))
 
   RN_RETURN_BUFFERS_2(pk, sk, sklen)
 }

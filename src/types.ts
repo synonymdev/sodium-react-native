@@ -26,6 +26,7 @@ export type Constants = {
   crypto_kdf_CONTEXTBYTES: number;
   crypto_kx_PUBLICKEYBYTES: number;
   crypto_kx_SECRETKEYBYTES: number;
+  crypto_kx_SEEDBYTES: number;
   crypto_onetimeauth_BYTES: number;
   crypto_onetimeauth_KEYBYTES: number;
   crypto_pwhash_BYTES_MIN: number;
