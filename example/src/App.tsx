@@ -1,7 +1,10 @@
 import * as React from 'react';
-import { StyleSheet, View, Text, Button, SafeAreaView } from 'react-native';
+import { StyleSheet, View, SafeAreaView } from 'react-native';
 import sodium from 'sodium-react-native';
 import b4a from 'b4a';
+
+import Text from './components/Text';
+import Button from './components/Button';
 import { sleep } from './helpers';
 
 export default function App() {
@@ -264,30 +267,66 @@ export default function App() {
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.buttons}>
-        <Button title="CryptoGenericHash" onPress={onCryptoGenericHash} />
         <Button
+          style={styles.button}
+          title="CryptoGenericHash"
+          onPress={onCryptoGenericHash}
+        />
+        <Button
+          style={styles.button}
           title="CryptoGenericHashBatch"
           onPress={onCryptoGenericHashBatch}
         />
-        <Button title="CryptoHashSha512" onPress={onCryptoHashSha512} />
-        <Button title="CryptoPwhash" onPress={onCryptoPwhash} />
         <Button
+          style={styles.button}
+          title="CryptoHashSha512"
+          onPress={onCryptoHashSha512}
+        />
+        <Button
+          style={styles.button}
+          title="CryptoPwhash"
+          onPress={onCryptoPwhash}
+        />
+        <Button
+          style={styles.button}
           title="CryptoAeadChacha20poly1305Ietf"
           onPress={onCryptoAeadChacha20poly1305Ietf}
         />
-        <Button title="CryptoSecretboxEasy" onPress={onCryptoSecretboxEasy} />
-        <Button title="CryptoStreamXor" onPress={onCryptoStreamXor} />
-        <Button title="CryptoSign" onPress={onCryptoSign} />
-        <Button title="CryptoSignDetached" onPress={onCryptoSignDetached} />
         <Button
+          style={styles.button}
+          title="CryptoSecretboxEasy"
+          onPress={onCryptoSecretboxEasy}
+        />
+        <Button
+          style={styles.button}
+          title="CryptoStreamXor"
+          onPress={onCryptoStreamXor}
+        />
+        <Button
+          style={styles.button}
+          title="CryptoSign"
+          onPress={onCryptoSign}
+        />
+        <Button
+          style={styles.button}
+          title="CryptoSignDetached"
+          onPress={onCryptoSignDetached}
+        />
+        <Button
+          style={styles.button}
           title="CryptoSignSeedKeypair"
           onPress={onCryptoSignSeedKeypair}
         />
         <Button
+          style={styles.button}
           title="CryptoSignEd25519SkToPk"
           onPress={onCryptoSignEd25519SkToPk}
         />
-        <Button title="RandomBytesBuf" onPress={onRandomBytesBuf} />
+        <Button
+          style={styles.button}
+          title="RandomBytesBuf"
+          onPress={onRandomBytesBuf}
+        />
       </View>
 
       {result && (
@@ -302,9 +341,15 @@ export default function App() {
 
 const styles = StyleSheet.create({
   container: {
+    paddingVertical: 16,
     flex: 1,
   },
-  buttons: {},
+  buttons: {
+    alignItems: 'center',
+  },
+  button: {
+    marginBottom: 16,
+  },
   result: {
     marginTop: 'auto',
     paddingHorizontal: 16,

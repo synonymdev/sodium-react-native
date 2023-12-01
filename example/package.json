@@ -1,11 +1,16 @@
 {
   "name": "sodium-react-native-example",
+  "description": "Example app for sodium-react-native",
   "version": "0.0.1",
   "private": true,
   "scripts": {
+    "start": "react-native start --reset-cache",
     "android": "react-native run-android",
     "ios": "react-native run-ios",
-    "start": "react-native start",
+    "clean": "yarn clean:rn && yarn clean:ios && yarn clean:android && yarn start --reset-cache",
+    "clean:rn": "watchman watch-del-all && npx del-cli node_modules && yarn && npx del-cli /tmp/metro-*",
+    "clean:android": "cd android && npx del-cli build app/build",
+    "clean:ios": "cd ios && npx del-cli Pods Podfile.lock build && pod deintegrate && pod install",
     "build:android": "cd android && ./gradlew assembleDebug --no-daemon --console=plain -PreactNativeArchitectures=arm64-v8a",
     "build:ios": "cd ios && xcodebuild -workspace SodiumReactNativeExample.xcworkspace -scheme SodiumReactNativeExample -configuration Debug -sdk iphonesimulator CC=clang CPLUSPLUS=clang++ LD=clang LDPLUSPLUS=clang++ GCC_OPTIMIZATION_LEVEL=0 GCC_PRECOMPILE_PREFIX_HEADER=YES ASSETCATALOG_COMPILER_OPTIMIZATION=time DEBUG_INFORMATION_FORMAT=dwarf COMPILER_INDEX_STORE_ENABLE=NO"
   },
