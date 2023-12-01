@@ -10,6 +10,7 @@
   "files": [
     "src",
     "lib",
+    "scripts",
     "android",
     "ios",
     "cpp",
@@ -33,15 +34,16 @@
     "test": "jest",
     "typecheck": "tsc --noEmit",
     "lint": "eslint \"**/*.{js,ts,tsx}\"",
-    "clean": "del-cli android/build example/android/build example/android/app/build example/ios/build lib",
-    "prepare": "bob build",
+    "clean": "del-cli android/build example/android/build example/android/app/build example/ios/build lib **.js.map crypto**.js constants.js helpers.js index.js libsodium.js memory.js padding.js randombytes.js types.js",
+    "prepack": "node scripts/build-library.js",
     "postinstall": "tar -xzf libsodium/build.tgz --directory ./libsodium",
     "release": "release-it"
   },
   "keywords": [
     "react-native",
     "ios",
-    "android"
+    "android",
+    "sodium"
   ],
   "repository": "https://github.com/pwltr/sodium-react-native",
   "author": "Philipp Walter <philippwalter@proton.me> (https://github.com/pwltr)",

@@ -22,7 +22,7 @@ import * as memory from './memory';
 import * as padding from './padding';
 import * as randombytes from './randombytes';
 
-export default {
+const sodium = {
   ...constants,
   ...crypto_aead,
   // ...crypto_auth,
@@ -47,3 +47,6 @@ export default {
   ...memory,
   ...randombytes,
 };
+
+module.exports = sodium;
+export default sodium;

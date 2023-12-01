@@ -28,6 +28,7 @@ DerivedData
 *.ipa
 *.xcuserstate
 project.xcworkspace
+IDEWorkspaceChecks.plist
 
 # Android/IJ
 #
@@ -80,3 +81,15 @@ lib/
 # libsodium
 libsodium/build
 libsodium/libsodium-stable
+
+# build
+**.js.map
+crypto**.js
+constants.js
+helpers.js
+index.js
+libsodium.js
+memory.js
+padding.js
+randombytes.js
+types.js
