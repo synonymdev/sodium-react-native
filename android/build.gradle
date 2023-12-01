@@ -53,11 +53,23 @@ android {
     minSdkVersion getExtOrIntegerDefault("minSdkVersion")
     targetSdkVersion getExtOrIntegerDefault("targetSdkVersion")
 
+    buildConfigField "boolean", "IS_NEW_ARCHITECTURE_ENABLED", isNewArchitectureEnabled().toString()
+
+  }
+
+  buildFeatures {
+    buildConfig true
   }
 
   buildTypes {
     release {
       minifyEnabled false
+    }
+  }
+
+  externalNativeBuild {
+    cmake {
+      path "CMakeLists.txt"
     }
   }
 
@@ -69,13 +81,26 @@ android {
     sourceCompatibility JavaVersion.VERSION_1_8
     targetCompatibility JavaVersion.VERSION_1_8
   }
+
+  sourceSets {
+    main {
+      if (isNewArchitectureEnabled()) {
+        java.srcDirs += [
+          "src/newarch",
+          // This is needed to build Kotlin project with NewArch enabled
+          "${project.buildDir}/generated/source/codegen/java"
+        ]
+      } else {
+        java.srcDirs += ["src/oldarch"]
+      }
+    }
+  }
 }
 
 repositories {
   mavenCentral()
   google()
 }
-
 
 dependencies {
   // For < 0.71, this will be from the local maven repo
@@ -84,3 +109,10 @@ dependencies {
   implementation "com.facebook.react:react-native:+"
 }
 
+if (isNewArchitectureEnabled()) {
+  react {
+    jsRootDir = file("../src/")
+    libraryName = "SodiumReactNative"
+    codegenJavaPackageName = "com.sodiumreactnative"
+  }
+}
