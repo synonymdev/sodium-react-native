@@ -8674,15 +8674,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"jest-t-assert@npm:^0.3.0":
-  version: 0.3.0
-  resolution: "jest-t-assert@npm:0.3.0"
-  peerDependencies:
-    jest: "*"
-  checksum: 79941e402f650e35ecba78d16db0a9e22aee2209e0222ef7dabe5c29150054be784c22accd06b2219508359382e3a62b46f726c9822bb6716a00ff428390f629
-  languageName: node
-  linkType: hard
-
 "jest-util@npm:^27.2.0":
   version: 27.5.1
   resolution: "jest-util@npm:27.5.1"
@@ -12328,7 +12319,6 @@ __metadata:
     buffer-byte-frequency: ^1.0.1
     chai: ^4.3.10
     events: ^3.3.0
-    jest-t-assert: ^0.3.0
     metro-react-native-babel-preset: 0.76.8
     mocha: ^10.2.0
     mocha-remote: ^1.6.1
