@@ -1,1 +1,1 @@
-it('write a test');
+it('write a test', () => {});
