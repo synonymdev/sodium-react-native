@@ -1,6 +1,6 @@
 {
   "name": "sodium-react-native-direct",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "description": "React native wrapper for libsodium crypto library",
   "main": "lib/commonjs/index",
   "module": "lib/module/index",
