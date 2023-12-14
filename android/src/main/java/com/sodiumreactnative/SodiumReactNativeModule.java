@@ -79,7 +79,7 @@ public class SodiumReactNativeModule extends ReactContextBaseJavaModule {
     constants.put("crypto_pwhash_PASSWD_MAX", SodiumReactNative.crypto_pwhash_passwd_max());
     constants.put("crypto_pwhash_SALTBYTES", SodiumReactNative.crypto_pwhash_saltbytes());
     constants.put("crypto_pwhash_STRBYTES", SodiumReactNative.crypto_pwhash_strbytes());
-    constants.put("crypto_pwhash_STRPREFIX", SodiumReactNative.crypto_pwhash_strprefix());
+    // constants.put("crypto_pwhash_STRPREFIX", SodiumReactNative.crypto_pwhash_strprefix());
     constants.put("crypto_pwhash_MEMLIMIT_INTERACTIVE", SodiumReactNative.crypto_pwhash_memlimit_interactive());
     constants.put("crypto_pwhash_MEMLIMIT_MIN", SodiumReactNative.crypto_pwhash_memlimit_min());
     constants.put("crypto_pwhash_MEMLIMIT_MAX", SodiumReactNative.crypto_pwhash_memlimit_max());
@@ -415,7 +415,6 @@ public class SodiumReactNativeModule extends ReactContextBaseJavaModule {
 
     return ArrayUtil.toWritableArray(_out);
   }
-
 
   @ReactMethod(isBlockingSynchronousMethod = true)
   public WritableArray crypto_generichash_init (
@@ -768,9 +767,9 @@ public class SodiumReactNativeModule extends ReactContextBaseJavaModule {
     byte[] _k = ArgumentsEx.toByteArray(k);
 
     try {
-      ArgumentsEx.check(_n, SodiumReactNative.crypto_secretbox_noncebytes(), "ERR_BAD_NONCE");
-      ArgumentsEx.check(_k, SodiumReactNative.crypto_secretbox_keybytes(), SodiumReactNative.crypto_pwhash_bytes_max(), "ERR_BAD_KEY");
       ArgumentsEx.check(_c, _m.length + SodiumReactNative.crypto_secretbox_macbytes(), "ERR_BAD_CIPHERTEXT");
+      ArgumentsEx.check(_n, SodiumReactNative.crypto_secretbox_noncebytes(), "ERR_BAD_NONCE");
+      ArgumentsEx.check(_k, SodiumReactNative.crypto_secretbox_keybytes(), "ERR_BAD_KEY");
     } catch (Exception e) {
       throw e;
     }
@@ -799,9 +798,9 @@ public class SodiumReactNativeModule extends ReactContextBaseJavaModule {
     byte[] _k = ArgumentsEx.toByteArray(k);
 
     try {
-      ArgumentsEx.check(_n, SodiumReactNative.crypto_secretbox_noncebytes(), "ERR_BAD_NONCE");
-      ArgumentsEx.check(_k, SodiumReactNative.crypto_secretbox_keybytes(), SodiumReactNative.crypto_pwhash_bytes_max(), "ERR_BAD_KEY");
       ArgumentsEx.check(_m, _c.length - SodiumReactNative.crypto_secretbox_macbytes(), "ERR_BAD_MESSAGE_LENGTH");
+      ArgumentsEx.check(_n, SodiumReactNative.crypto_secretbox_noncebytes(), "ERR_BAD_NONCE");
+      ArgumentsEx.check(_k, SodiumReactNative.crypto_secretbox_keybytes(), "ERR_BAD_KEY");
     } catch (Exception e) {
       throw e;
     }

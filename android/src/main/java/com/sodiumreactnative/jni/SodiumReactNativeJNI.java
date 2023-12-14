@@ -19,9 +19,9 @@ public class SodiumReactNativeJNI {
   public final static native int crypto_aead_chacha20poly1305_encrypt_detached(byte[] jarg1, byte[] jarg2, int[] jarg3, byte[] jarg4, int jarg5, byte[] jarg6, int jarg7, byte[] jarg8, byte[] jarg9, byte[] jarg10);
   public final static native int crypto_aead_chacha20poly1305_decrypt(byte[] jarg1, int[] jarg2, byte[] jarg3, byte[] jarg4, int jarg5, byte[] jarg6, int jarg7, byte[] jarg8, byte[] jarg9);
   public final static native int crypto_aead_chacha20poly1305_decrypt_detached(byte[] jarg1, byte[] jarg2, byte[] jarg3, int jarg4, byte[] jarg5, byte[] jarg6, int jarg7, byte[] jarg8, byte[] jarg9);
+  public final static native int crypto_aead_chacha20poly1305_ietf_abytes();
   public final static native int crypto_aead_chacha20poly1305_ietf_keybytes();
   public final static native int crypto_aead_chacha20poly1305_ietf_nsecbytes();
-  public final static native int crypto_aead_chacha20poly1305_ietf_abytes();
   public final static native int crypto_aead_chacha20poly1305_ietf_messagebytes_max();
   public final static native int crypto_aead_chacha20poly1305_ietf_npubbytes();
   public final static native void crypto_aead_chacha20poly1305_ietf_keygen(byte[] jarg1);
@@ -29,10 +29,10 @@ public class SodiumReactNativeJNI {
   public final static native int crypto_aead_chacha20poly1305_ietf_encrypt_detached(byte[] jarg1, byte[] jarg2, int[] jarg3, byte[] jarg4, int jarg5, byte[] jarg6, int jarg7, byte[] jarg8, byte[] jarg9, byte[] jarg10);
   public final static native int crypto_aead_chacha20poly1305_ietf_decrypt(byte[] jarg1, int[] jarg2, byte[] jarg3, byte[] jarg4, int jarg5, byte[] jarg6, int jarg7, byte[] jarg8, byte[] jarg9);
   public final static native int crypto_aead_chacha20poly1305_ietf_decrypt_detached(byte[] jarg1, byte[] jarg2, byte[] jarg3, int jarg4, byte[] jarg5, byte[] jarg6, int jarg7, byte[] jarg8, byte[] jarg9);
+  public final static native int crypto_aead_xchacha20poly1305_ietf_abytes();
   public final static native int crypto_aead_xchacha20poly1305_ietf_keybytes();
   public final static native int crypto_aead_xchacha20poly1305_ietf_npubbytes();
   public final static native int crypto_aead_xchacha20poly1305_ietf_nsecbytes();
-  public final static native int crypto_aead_xchacha20poly1305_ietf_abytes();
   public final static native int crypto_aead_xchacha20poly1305_ietf_messagebytes_max();
   public final static native void crypto_aead_xchacha20poly1305_ietf_keygen(byte[] jarg1);
   public final static native int crypto_aead_xchacha20poly1305_ietf_encrypt_detached(byte[] jarg1, byte[] jarg2, int[] jarg3, byte[] jarg4, int jarg5, byte[] jarg6, int jarg7, byte[] jarg8, byte[] jarg9, byte[] jarg10);
@@ -160,8 +160,8 @@ public class SodiumReactNativeJNI {
   public final static native int crypto_hash_sha256_init(byte[] jarg1);
   public final static native int crypto_hash_sha256_update(byte[] jarg1, byte[] jarg2, int jarg3);
   public final static native int crypto_hash_sha256_final(byte[] jarg1, byte[] jarg2);
-  public final static native int crypto_hash_sha512_bytes();
   public final static native int crypto_hash_sha512(byte[] jarg1, byte[] jarg2, int jarg3);
+  public final static native int crypto_hash_sha512_bytes();
   public final static native int crypto_hash_sha512_statebytes();
   public final static native int crypto_hash_sha512_init(byte[] jarg1);
   public final static native int crypto_hash_sha512_update(byte[] jarg1, byte[] jarg2, int jarg3);
@@ -197,6 +197,7 @@ public class SodiumReactNativeJNI {
   public final static native int crypto_onetimeauth_poly1305_init(byte[] jarg1, byte[] jarg2);
   public final static native int crypto_onetimeauth_poly1305_update(byte[] jarg1, byte[] jarg2, int jarg3);
   public final static native int crypto_onetimeauth_poly1305_final(byte[] jarg1, byte[] jarg2);
+  public final static native int crypto_pwhash(byte[] jarg1, int jarg2, byte[] jarg3, int jarg4, byte[] jarg5, int jarg6, int jarg7, int jarg8);
   public final static native int crypto_pwhash_alg_argon2i13();
   public final static native int crypto_pwhash_alg_argon2id13();
   public final static native int crypto_pwhash_alg_default();
@@ -206,7 +207,7 @@ public class SodiumReactNativeJNI {
   public final static native int crypto_pwhash_passwd_max();
   public final static native int crypto_pwhash_saltbytes();
   public final static native int crypto_pwhash_strbytes();
-  public final static native byte[] crypto_pwhash_strprefix();
+  // public final static native byte[] crypto_pwhash_strprefix();
   public final static native int crypto_pwhash_opslimit_min();
   public final static native int crypto_pwhash_opslimit_max();
   public final static native int crypto_pwhash_memlimit_min();
@@ -217,7 +218,6 @@ public class SodiumReactNativeJNI {
   public final static native int crypto_pwhash_memlimit_moderate();
   public final static native int crypto_pwhash_opslimit_sensitive();
   public final static native int crypto_pwhash_memlimit_sensitive();
-  public final static native int crypto_pwhash(byte[] jarg1, int jarg2, byte[] jarg3, int jarg4, byte[] jarg5, int jarg6, int jarg7, int jarg8);
   public final static native int crypto_pwhash_str(byte[] jarg1, byte[] jarg2, int jarg3, int jarg4, int jarg5);
   public final static native int crypto_pwhash_str_verify(byte[] jarg1, byte[] jarg2, int jarg3);
   public final static native byte[] crypto_pwhash_primitive();
@@ -237,8 +237,8 @@ public class SodiumReactNativeJNI {
   public final static native int crypto_scalarmult_ed25519_bytes();
   public final static native int crypto_scalarmult_ed25519_scalarbytes();
   public final static native int crypto_secretbox_keybytes();
-  public final static native int crypto_secretbox_noncebytes();
   public final static native int crypto_secretbox_macbytes();
+  public final static native int crypto_secretbox_noncebytes();
   public final static native int crypto_secretbox_zerobytes();
   public final static native int crypto_secretbox_boxzerobytes();
   public final static native byte[] crypto_secretbox_primitive();
@@ -275,6 +275,7 @@ public class SodiumReactNativeJNI {
   public final static native int crypto_shorthash_siphash24_bytes();
   public final static native int crypto_shorthash_siphash24_keybytes();
   public final static native int crypto_shorthash_siphash24(byte[] jarg1, byte[] jarg2, int jarg3, byte[] jarg4);
+  public final static native int crypto_sign(byte[] jarg1, int[] jarg2, byte[] jarg3, int jarg4, byte[] jarg5);
   public final static native int crypto_sign_bytes();
   public final static native int crypto_sign_seedbytes();
   public final static native int crypto_sign_publickeybytes();
@@ -282,12 +283,11 @@ public class SodiumReactNativeJNI {
   public final static native byte[] crypto_sign_primitive();
   public final static native int crypto_sign_keypair(byte[] jarg1, byte[] jarg2);
   public final static native int crypto_sign_seed_keypair(byte[] jarg1, byte[] jarg2, byte[] jarg3);
-  public final static native int crypto_sign(byte[] jarg1, int[] jarg2, byte[] jarg3, int jarg4, byte[] jarg5);
   public final static native int crypto_sign_open(byte[] jarg1, int[] jarg2, byte[] jarg3, int jarg4, byte[] jarg5);
   public final static native int crypto_sign_detached(byte[] jarg1, int[] jarg2, byte[] jarg3, int jarg4, byte[] jarg5);
   public final static native int crypto_sign_verify_detached(byte[] jarg1, byte[] jarg2, int jarg3, byte[] jarg4);
-  public final static native int crypto_sign_ed25519_sk_to_seed(byte[] jarg1, byte[] jarg2);
   public final static native int crypto_sign_ed25519_sk_to_pk(byte[] jarg1, byte[] jarg2);
+  public final static native int crypto_sign_ed25519_sk_to_seed(byte[] jarg1, byte[] jarg2);
   public final static native int crypto_sign_ed25519_bytes();
   public final static native int crypto_sign_ed25519_seedbytes();
   public final static native int crypto_sign_ed25519_publickeybytes();
