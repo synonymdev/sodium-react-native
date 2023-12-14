@@ -2,8 +2,8 @@
   "compilerOptions": {
     "rootDir": ".",
     "paths": {
-      "sodium-react-native": ["./src/index"],
-      "sodium-react-native/*": ["./src/*"]
+      "sodium-react-native-direct": ["./src/index"],
+      "sodium-react-native-direct/*": ["./src/*"]
     },
     "allowUnreachableCode": false,
     "allowUnusedLabels": false,

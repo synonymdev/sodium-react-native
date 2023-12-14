@@ -1,6 +1,6 @@
 {
-  "name": "sodium-react-native",
-  "version": "0.1.0",
+  "name": "sodium-react-native-direct",
+  "version": "0.3.0",
   "description": "React native wrapper for libsodium crypto library",
   "main": "lib/commonjs/index",
   "module": "lib/module/index",
@@ -39,7 +39,7 @@
     "!**/.*"
   ],
   "scripts": {
-    "example": "yarn workspace sodium-react-native-example",
+    "example": "yarn workspace sodium-react-native-direct-example",
     "build:libsodium": "./libsodium/build.sh",
     "test": "jest",
     "typecheck": "tsc --noEmit",

@@ -1,6 +1,6 @@
 {
-  "name": "sodium-react-native-example",
-  "description": "Example app for sodium-react-native",
+  "name": "sodium-react-native-direct-example",
+  "description": "Example app for sodium-react-native-direct",
   "version": "0.0.1",
   "private": true,
   "scripts": {

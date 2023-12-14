@@ -11932,9 +11932,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"sodium-react-native-example@workspace:example":
+"sodium-react-native-direct-example@workspace:example":
   version: 0.0.0-use.local
-  resolution: "sodium-react-native-example@workspace:example"
+  resolution: "sodium-react-native-direct-example@workspace:example"
   dependencies:
     "@babel/core": ^7.20.0
     "@babel/preset-env": ^7.20.0
@@ -11950,9 +11950,9 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"sodium-react-native@workspace:.":
+"sodium-react-native-direct@workspace:.":
   version: 0.0.0-use.local
-  resolution: "sodium-react-native@workspace:."
+  resolution: "sodium-react-native-direct@workspace:."
   dependencies:
     "@commitlint/config-conventional": ^17.0.2
     "@evilmartians/lefthook": ^1.5.0

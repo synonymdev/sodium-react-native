@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { StyleSheet, View, SafeAreaView } from 'react-native';
-import sodium from 'sodium-react-native';
+import sodium from 'sodium-react-native-direct';
 import b4a from 'b4a';
 
 import Text from './components/Text';
