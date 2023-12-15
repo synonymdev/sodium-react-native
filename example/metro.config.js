@@ -26,10 +26,22 @@ const config = {
       )
     ),
 
-    extraNodeModules: modules.reduce((acc, name) => {
-      acc[name] = path.join(__dirname, 'node_modules', name);
-      return acc;
-    }, {}),
+    extraNodeModules: modules.reduce(
+      (acc, name) => {
+        acc[name] = path.join(__dirname, 'node_modules', name);
+        return acc;
+      },
+      {
+        stream: path.resolve(__dirname, './node_modules/stream-browserify'),
+        events: path.resolve(__dirname, './node_modules/events'),
+        process: path.resolve(__dirname, './node_modules/process'),
+        buffer: path.resolve(
+          __dirname,
+          './node_modules/@craftzdog/react-native-buffer'
+        ),
+        tape: path.resolve(__dirname, './tape-to-mocha'),
+      }
+    ),
   },
 
   transformer: {

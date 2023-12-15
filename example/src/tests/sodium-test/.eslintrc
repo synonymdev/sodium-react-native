@@ -1,0 +1,9 @@
+{
+  "rules": {
+    "prettier/prettier": "off",
+    "no-bitwise": "off"
+  },
+  "globals": {
+    "Buffer": true
+  }
+}

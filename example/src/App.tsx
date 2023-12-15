@@ -7,8 +7,11 @@ import Text from './components/Text';
 import Button from './components/Button';
 import { sleep } from './helpers';
 
+import Tests from './Tests';
+
 export default function App() {
   const [result, setResult] = React.useState('');
+  const [showTests, setShowTests] = React.useState(false);
 
   const onCryptoGenericHash = () => {
     const out = new Uint8Array(sodium.crypto_generichash_BYTES);
@@ -264,6 +267,14 @@ export default function App() {
     setResult(decoded);
   };
 
+  const openTests = () => {
+    setShowTests(true);
+  };
+
+  if (showTests) {
+    return <Tests />;
+  }
+
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.buttons}>
@@ -327,6 +338,7 @@ export default function App() {
           title="RandomBytesBuf"
           onPress={onRandomBytesBuf}
         />
+        <Button style={styles.button} title="Open tests" onPress={openTests} />
       </View>
 
       {result && (
