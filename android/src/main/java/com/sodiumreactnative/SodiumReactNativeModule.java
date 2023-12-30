@@ -1013,8 +1013,8 @@ public class SodiumReactNativeModule extends ReactContextBaseJavaModule {
     byte[] _sk = ArgumentsEx.toByteArray(sk);
 
     try {
-      ArgumentsEx.check(_sk, SodiumReactNative.crypto_sign_secretkeybytes(), "ERR_BAD_KEY");
       ArgumentsEx.check(_sig, SodiumReactNative.crypto_sign_bytes(), "ERR_BAD_SIGNATURE_LENGTH");
+      ArgumentsEx.check(_sk, SodiumReactNative.crypto_sign_secretkeybytes(), "ERR_BAD_KEY");
     } catch (Exception e) {
       throw e;
     }

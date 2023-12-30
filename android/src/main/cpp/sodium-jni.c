@@ -757,7 +757,7 @@ Java_com_sodiumreactnative_jni_SodiumReactNativeJNI_crypto_1sign_1detached(
   unsigned char *m = as_unsigned_char_array(jenv, j_m);
   unsigned char *sk = as_unsigned_char_array(jenv, j_sk);
 
-  int result = crypto_sign(sig, NULL, m, j_mlen, sk);
+  int result = crypto_sign_detached(sig, NULL, m, j_mlen, sk);
   (*jenv)->ReleaseByteArrayElements(jenv, j_sig, (jbyte *) sig, 0);
   return (jint)result;
 }
