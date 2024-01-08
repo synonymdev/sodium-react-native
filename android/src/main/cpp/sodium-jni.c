@@ -695,7 +695,7 @@ Java_com_sodiumreactnative_jni_SodiumReactNativeJNI_crypto_1sign_1seed_1keypair(
   unsigned char *sk = (unsigned char *) (*jenv)->GetByteArrayElements(jenv, j_sk, 0);
   unsigned char *seed = as_unsigned_char_array(jenv, j_seed);
 
-  int result = crypto_sign_keypair(pk, sk);
+  int result = crypto_sign_seed_keypair(pk, sk, seed);
   (*jenv)->ReleaseByteArrayElements(jenv, j_pk, (jbyte *) pk, 0);
   (*jenv)->ReleaseByteArrayElements(jenv, j_sk, (jbyte *) sk, 0);
   return (jint)result;
@@ -1436,7 +1436,7 @@ Java_com_sodiumreactnative_jni_SodiumReactNativeJNI_crypto_1scalarmult_1ed25519_
 ) {
   unsigned char *q = (unsigned char *) (*jenv)->GetByteArrayElements(jenv, j_q, 0);
   unsigned char *n = (unsigned char *) (*jenv)->GetByteArrayElements(jenv, j_n, 0);
-  int result = (int)crypto_scalarmult_ed25519_base(q, n);
+  int result = (int)crypto_scalarmult_ed25519_base_noclamp(q, n);
   (*jenv)->ReleaseByteArrayElements(jenv, j_q, (jbyte *) q, 0);
   (*jenv)->ReleaseByteArrayElements(jenv, j_n, (jbyte *) n, 0);
   return (jint)result;
@@ -1453,7 +1453,7 @@ Java_com_sodiumreactnative_jni_SodiumReactNativeJNI_crypto_1scalarmult_1ed25519_
   unsigned char *q = (unsigned char *) (*jenv)->GetByteArrayElements(jenv, j_q, 0);
   unsigned char *n = (unsigned char *) (*jenv)->GetByteArrayElements(jenv, j_n, 0);
   unsigned char *p = (unsigned char *) (*jenv)->GetByteArrayElements(jenv, j_p, 0);
-  int result = (int)crypto_scalarmult_ed25519(q, n, p);
+  int result = (int)crypto_scalarmult_ed25519_noclamp(q, n, p);
   (*jenv)->ReleaseByteArrayElements(jenv, j_q, (jbyte *) q, 0);
   (*jenv)->ReleaseByteArrayElements(jenv, j_n, (jbyte *) n, 0);
   (*jenv)->ReleaseByteArrayElements(jenv, j_p, (jbyte *) p, 0);
