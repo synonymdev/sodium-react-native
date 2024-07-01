@@ -1130,6 +1130,108 @@ Java_com_sodiumreactnative_jni_SodiumReactNativeJNI_crypto_1stream_1noncebytes(
   return (jint)crypto_stream_NONCEBYTES;
 }
 
+JNIEXPORT jint JNICALL
+Java_com_sodiumreactnative_jni_SodiumReactNativeJNI_crypto_1box_1sealbytes(
+  JNIEnv *env,
+  jclass clazz
+) {
+  return (jint)crypto_box_SEALBYTES;
+}
+
+JNIEXPORT jint JNICALL
+Java_com_sodiumreactnative_jni_SodiumReactNativeJNI_crypto_1box_1publickeybytes(
+  JNIEnv *env,
+  jclass clazz
+) {
+  return (jint)crypto_box_PUBLICKEYBYTES;
+}
+
+JNIEXPORT jint JNICALL
+Java_com_sodiumreactnative_jni_SodiumReactNativeJNI_crypto_1box_1secretkeybytes(
+  JNIEnv *env,
+  jclass clazz
+) {
+  return (jint)crypto_box_SECRETKEYBYTES;
+}
+
+JNIEXPORT jint JNICALL
+Java_com_sodiumreactnative_jni_SodiumReactNativeJNI_crypto_1box_1seedbytes(
+  JNIEnv *env,
+  jclass clazz
+) {
+  return (jint)crypto_box_SEEDBYTES;
+}
+
+JNIEXPORT jint JNICALL
+Java_com_sodiumreactnative_jni_SodiumReactNativeJNI_crypto_1box_1noncebytes(
+  JNIEnv *env,
+  jclass clazz
+) {
+  return (jint)crypto_box_NONCEBYTES;
+}
+
+JNIEXPORT jint JNICALL
+Java_com_sodiumreactnative_jni_SodiumReactNativeJNI_crypto_1box_1macbytes(
+  JNIEnv *env,
+  jclass clazz
+) {
+  return (jint)crypto_box_MACBYTES;
+}
+
+JNIEXPORT jint JNICALL
+Java_com_sodiumreactnative_jni_SodiumReactNativeJNI_crypto_1box_1keypair(
+  JNIEnv *jenv,
+  jclass clazz,
+  jbyteArray j_pk,
+  jbyteArray j_sk
+) {
+  unsigned char *pk = (unsigned char *) (*jenv)->GetByteArrayElements(jenv, j_pk, 0);
+  unsigned char *sk = (unsigned char *) (*jenv)->GetByteArrayElements(jenv, j_sk, 0);
+
+  int result = crypto_box_keypair(pk, sk);
+  (*jenv)->ReleaseByteArrayElements(jenv, j_pk, (jbyte *) pk, 0);
+  (*jenv)->ReleaseByteArrayElements(jenv, j_sk, (jbyte *) sk, 0);
+  return (jint)result;
+}
+
+JNIEXPORT jint JNICALL
+Java_com_sodiumreactnative_jni_SodiumReactNativeJNI_crypto_1box_1seal(
+  JNIEnv *jenv,
+  jclass clazz,
+  jbyteArray j_c,
+  jbyteArray j_m,
+  jint j_mlen,
+  jbyteArray j_pk
+) {
+  unsigned char *c = (unsigned char *) (*jenv)->GetByteArrayElements(jenv, j_c, 0);
+  unsigned char *m = as_unsigned_char_array(jenv, j_m);
+  unsigned char *pk = as_unsigned_char_array(jenv, j_pk);
+
+  int result = crypto_box_seal(c, m, j_mlen, pk);
+  (*jenv)->ReleaseByteArrayElements(jenv, j_c, (jbyte *) c, 0);
+  return (jint)result;
+}
+
+JNIEXPORT jint JNICALL
+Java_com_sodiumreactnative_jni_SodiumReactNativeJNI_crypto_1box_1seal_1open(
+  JNIEnv *jenv,
+  jclass clazz,
+  jbyteArray j_m,
+  jbyteArray j_c,
+  jint j_clen,
+  jbyteArray j_pk,
+  jbyteArray j_sk
+) {
+  unsigned char *m = (unsigned char *) (*jenv)->GetByteArrayElements(jenv, j_m, 0);
+  unsigned char *c = as_unsigned_char_array(jenv, j_c);
+  unsigned char *pk = as_unsigned_char_array(jenv, j_pk);
+  unsigned char *sk = as_unsigned_char_array(jenv, j_sk);
+
+  int result = crypto_box_seal_open(m, c, j_clen, pk, sk);
+  (*jenv)->ReleaseByteArrayElements(jenv, j_m, (jbyte *) m, 0);
+  return (jint)result;
+}
+
 /* *****************************************************************************
  * Key exchange
  * *****************************************************************************

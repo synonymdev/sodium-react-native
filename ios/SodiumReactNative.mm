@@ -123,6 +123,12 @@ RCT_EXPORT_MODULE()
     @"crypto_sign_SEEDBYTES": @ crypto_sign_SEEDBYTES,
     @"crypto_stream_KEYBYTES": @ crypto_stream_KEYBYTES,
     @"crypto_stream_NONCEBYTES": @ crypto_stream_NONCEBYTES,
+    @"crypto_box_SEALBYTES": @ crypto_box_SEALBYTES,
+    @"crypto_box_PUBLICKEYBYTES": @ crypto_box_PUBLICKEYBYTES,
+    @"crypto_box_SECRETKEYBYTES": @ crypto_box_SECRETKEYBYTES,
+    @"crypto_box_SEEDBYTES": @ crypto_box_SEEDBYTES,
+    @"crypto_box_NONCEBYTES": @ crypto_box_NONCEBYTES,
+    @"crypto_box_MACBYTES": @ crypto_box_MACBYTES,
   };
 }
 
@@ -894,6 +900,46 @@ RCT_EXPORT_BLOCKING_SYNCHRONOUS_METHOD(
   RN_CHECK_FAILURE(crypto_kx_seed_keypair(pk_data, sk_data, seed_data))
 
   RN_RETURN_BUFFERS_2(pk, sk, sklen)
+}
+
+RCT_EXPORT_BLOCKING_SYNCHRONOUS_METHOD(
+  crypto_box_keypair: (NSArray *) pk sk: (NSArray *) sk)
+{
+  RN_RESULT_BUFFER(pk, crypto_box_PUBLICKEYBYTES, ERR_BAD_KEY)
+  RN_RESULT_BUFFER(sk, crypto_box_SECRETKEYBYTES, ERR_BAD_KEY)
+
+  crypto_box_keypair(pk_data, sk_data);
+
+  RN_RETURN_BUFFERS_2(pk, sk, sklen)
+}
+
+RCT_EXPORT_BLOCKING_SYNCHRONOUS_METHOD(
+  crypto_box_seal:(NSArray*)c m:(NSArray*)m pk:(NSArray*)pk)
+{
+  RN_ARG_BUFFER_NO_CHECK(pk)
+  RN_ARG_BUFFER_NO_CHECK(m)
+
+  unsigned long long clen_check = mlen + crypto_box_SEALBYTES;
+  RN_RESULT_BUFFER(c, clen_check, ERR_BAD_CIPHERTEXT)
+
+  RN_CHECK_FAILURE(crypto_box_seal(c_data, m_data, mlen, pk_data))
+
+  RN_RETURN_BUFFER(c)
+}
+
+RCT_EXPORT_BLOCKING_SYNCHRONOUS_METHOD(
+  crypto_box_seal_open:(NSArray*)m c:(NSArray*)c pk:(NSArray*)pk sk:(NSArray*)sk)
+{
+  RN_ARG_BUFFER_NO_CHECK(pk)
+  RN_ARG_BUFFER_NO_CHECK(sk)
+  RN_ARG_BUFFER_NO_CHECK(c)
+
+  unsigned long long mlen_check = clen - crypto_box_SEALBYTES;
+  RN_RESULT_BUFFER(m, mlen_check, ERR_BAD_MESSAGE_LENGTH)
+
+  RN_CHECK_FAILURE(crypto_box_seal_open(m_data, c_data, clen, pk_data, sk_data))
+
+  RN_RETURN_BUFFER(m)
 }
 
 @end
