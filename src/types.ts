@@ -74,4 +74,10 @@ export type Constants = {
   crypto_sign_SECRETKEYBYTES: number;
   crypto_stream_KEYBYTES: number;
   crypto_stream_NONCEBYTES: number;
+  crypto_box_SEALBYTES: number;
+  crypto_box_PUBLICKEYBYTES: number;
+  crypto_box_SECRETKEYBYTES: number;
+  crypto_box_SEEDBYTES: number;
+  crypto_box_NONCEBYTES: number;
+  crypto_box_MACBYTES: number;
 };

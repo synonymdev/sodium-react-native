@@ -1,7 +1,7 @@
 import * as constants from './constants';
 import * as crypto_aead from './crypto_aead';
 // import * as crypto_auth from './crypto_auth';
-// import * as crypto_box from './crypto_box';
+import * as crypto_box from './crypto_box';
 import * as crypto_core from './crypto_core';
 import * as crypto_generichash from './crypto_generichash';
 import * as crypto_hash from './crypto_hash';
@@ -26,7 +26,7 @@ const sodium = {
   ...constants,
   ...crypto_aead,
   // ...crypto_auth,
-  // ...crypto_box,
+  ...crypto_box,
   ...crypto_core,
   ...crypto_generichash,
   ...crypto_hash,

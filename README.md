@@ -255,6 +255,29 @@ Clamping involves clearing the lowest 3 bits of the result, ensuring the result 
   crypto_secretstream_xchacha20poly1305_TAG_FINAL
 ```
 
+#### `crypto_box`
+
+[Sealed box encryption](https://sodium-friends.github.io/docs/docs/sealedboxencryption)
+
+#### Methods
+
+```
+  crypto_box_keypair
+  crypto_box_seal
+  crypto_box_seal_open
+```
+
+#### Constants
+
+```
+  crypto_box_SEALBYTES
+  crypto_box_PUBLICKEYBYTES
+  crypto_box_SECRETKEYBYTES
+  crypto_box_SEEDBYTES
+  crypto_box_NONCEBYTES
+  crypto_box_MACBYTES
+```
+
 #### `crypto_secretbox`
 
 [Secret key box encryption](https://sodium-friends.github.io/docs/docs/secretkeyboxencryption)

@@ -267,6 +267,37 @@ export default function App() {
     setResult(decoded);
   };
 
+  const onCryptoBoxSeal = async () => {
+    const message = b4a.from('Hello, World!');
+    const cipherText = new Uint8Array(
+      message.byteLength + sodium.crypto_box_SEALBYTES
+    );
+    const pk = new Uint8Array(sodium.crypto_box_PUBLICKEYBYTES);
+    const sk = new Uint8Array(sodium.crypto_box_SECRETKEYBYTES);
+
+    try {
+      sodium.crypto_box_keypair(pk, sk);
+      console.log({ pk: b4a.toString(pk, 'hex') });
+      console.log({ sk: b4a.toString(sk, 'hex') });
+      sodium.crypto_box_seal(cipherText, message, pk);
+      const encrypted = b4a.toString(cipherText, 'hex');
+      console.log({ encrypted });
+      setResult(`Encrypted: ${encrypted}\nDecrypting in 2 seconds...`);
+      await sleep(2000);
+
+      const decrypted = new Uint8Array(
+        cipherText.byteLength - sodium.crypto_box_SEALBYTES
+      );
+      sodium.crypto_box_seal_open(decrypted, cipherText, pk, sk);
+      const decoded = b4a.toString(decrypted);
+      console.log({ decoded });
+      setResult(`Decrypted: ${decoded}`);
+    } catch (error: any) {
+      console.log(error);
+      setResult(error.message);
+    }
+  };
+
   const openTests = () => {
     setShowTests(true);
   };
@@ -337,6 +368,11 @@ export default function App() {
           style={styles.button}
           title="RandomBytesBuf"
           onPress={onRandomBytesBuf}
+        />
+        <Button
+          style={styles.button}
+          title="CryptoBoxSeal"
+          onPress={onCryptoBoxSeal}
         />
         <Button style={styles.button} title="Open tests" onPress={openTests} />
       </View>

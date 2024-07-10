@@ -119,22 +119,22 @@ public class SodiumReactNativeModule extends ReactContextBaseJavaModule {
     constants.put("crypto_sign_SECRETKEYBYTES", SodiumReactNative.crypto_sign_secretkeybytes());
     constants.put("crypto_stream_KEYBYTES", SodiumReactNative.crypto_stream_keybytes());
     constants.put("crypto_stream_NONCEBYTES", SodiumReactNative.crypto_stream_noncebytes());
+    constants.put("crypto_box_SEALBYTES", SodiumReactNative.crypto_box_sealbytes());
+    constants.put("crypto_box_SEEDBYTES", SodiumReactNative.crypto_box_seedbytes());
+    constants.put("crypto_box_PUBLICKEYBYTES", SodiumReactNative.crypto_box_publickeybytes());
+    constants.put("crypto_box_SECRETKEYBYTES", SodiumReactNative.crypto_box_secretkeybytes());
+    constants.put("crypto_box_NONCEBYTES", SodiumReactNative.crypto_box_noncebytes());
+    constants.put("crypto_box_MACBYTES", SodiumReactNative.crypto_box_macbytes());
 
     // These may be useful for future extensions
 
     // constants.put("crypto_auth_BYTES", SodiumReactNative.crypto_auth_bytes());
     // constants.put("crypto_auth_KEYBYTES", SodiumReactNative.crypto_auth_keybytes());
     // constants.put("crypto_hash_BYTES", SodiumReactNative.crypto_hash_bytes());
-    // constants.put("crypto_box_SEEDBYTES", SodiumReactNative.crypto_box_seedbytes());
-    // constants.put("crypto_box_PUBLICKEYBYTES", SodiumReactNative.crypto_box_publickeybytes());
-    // constants.put("crypto_box_SECRETKEYBYTES", SodiumReactNative.crypto_box_secretkeybytes());
-    // constants.put("crypto_box_NONCEBYTES", SodiumReactNative.crypto_box_noncebytes());
-    // constants.put("crypto_box_MACBYTES", SodiumReactNative.crypto_box_macbytes());
     // constants.put("crypto_hash_sha256_STATEBYTES", SodiumReactNative.crypto_hash_sha256_statebytes());
     // constants.put("crypto_hash_sha512_STATEBYTES", SodiumReactNative.crypto_hash_sha512_statebytes());
     // constants.put("crypto_stream_xor_STATEBYTES", SodiumReactNative.crypto_stream_xor_statebytes());
     // constants.put("crypto_stream_chacha20_xor_STATEBYTES", SodiumReactNative.crypto_stream_chacha20_xor_statebytes());
-    // constants.put("crypto_box_SEALBYTES", SodiumReactNative.crypto_box_sealbytes());
     // constants.put("crypto_hash_sha256_BYTES", SodiumReactNative.crypto_hash_sha256_bytes());
     // constants.put("crypto_pwhash_scryptsalsa208sha256_BYTES_MIN", SodiumReactNative.crypto_pwhash_scryptsalsa208sha256_bytes_min());
     // constants.put("crypto_pwhash_scryptsalsa208sha256_BYTES_MAX", SodiumReactNative.crypto_pwhash_scryptsalsa208sha256_bytes_max());
@@ -1210,5 +1210,95 @@ public class SodiumReactNativeModule extends ReactContextBaseJavaModule {
     SodiumReactNative.sodium_unpad(unpadded_buflen, _buf, padded_buflen, blocksize);
 
     return ArrayUtil.toWritableArray( Arrays.copyOfRange(_buf, 0, unpadded_buflen[0] ) );
+  }
+
+  @ReactMethod(isBlockingSynchronousMethod = true)
+  public WritableArray crypto_box_keypair (
+    ReadableArray pk,
+    ReadableArray sk
+  ) throws Exception {
+    byte[] _pk = ArgumentsEx.toByteArray(pk);
+    byte[] _sk = ArgumentsEx.toByteArray(sk);
+
+    try {
+      ArgumentsEx.check(_pk, SodiumReactNative.crypto_box_publickeybytes(), "ERR_BAD_KEY");
+      ArgumentsEx.check(_sk, SodiumReactNative.crypto_box_secretkeybytes(), "ERR_BAD_KEY");
+    } catch (Exception e) {
+      throw e;
+    }
+
+    int success = SodiumReactNative.crypto_box_keypair(_pk, _sk);
+    if (success != 0) {
+      Exception e = new Exception("crypto_box_keypair execution failed");
+      throw e;
+    }
+
+    ByteArrayOutputStream outputStream = new ByteArrayOutputStream( );
+
+    try {
+      outputStream.write( _pk );
+      outputStream.write( _sk );
+    } catch (IOException e) {
+      throw e;
+    }
+
+    byte ret[] = outputStream.toByteArray( );
+
+    return ArrayUtil.toWritableArray(ret);
+  }
+
+  @ReactMethod(isBlockingSynchronousMethod = true)
+  public WritableArray crypto_box_seal (
+    ReadableArray c,
+    ReadableArray m,
+    ReadableArray pk
+  ) throws Exception {
+    byte[] _c = ArgumentsEx.toByteArray(c);
+    byte[] _m = ArgumentsEx.toByteArray(m);
+    byte[] _pk = ArgumentsEx.toByteArray(pk);
+
+    try {
+      ArgumentsEx.check(_pk, SodiumReactNative.crypto_box_publickeybytes(), "ERR_BAD_KEY");
+      ArgumentsEx.check(_c, _m.length + SodiumReactNative.crypto_box_sealbytes(), "ERR_BAD_CIPHERTEXT_LENGTH");
+    } catch (Exception e) {
+      throw e;
+    }
+
+    int success = SodiumReactNative.crypto_box_seal(_c, _m, _m.length, _pk);
+    if (success != 0) {
+      Exception e = new Exception("crypto_box_seal execution failed");
+      throw e;
+    }
+
+    return ArrayUtil.toWritableArray(_c);
+  }
+
+  @ReactMethod(isBlockingSynchronousMethod = true)
+  public WritableArray crypto_box_seal_open (
+    ReadableArray m,
+    ReadableArray c,
+    ReadableArray pk,
+    ReadableArray sk
+  ) throws Exception {
+    byte[] _m = ArgumentsEx.toByteArray(m);
+    byte[] _c = ArgumentsEx.toByteArray(c);
+    byte[] _pk = ArgumentsEx.toByteArray(pk);
+    byte[] _sk = ArgumentsEx.toByteArray(sk);
+
+    try {
+      ArgumentsEx.check(_pk, SodiumReactNative.crypto_box_publickeybytes(), "ERR_BAD_KEY");
+      ArgumentsEx.check(_sk, SodiumReactNative.crypto_box_secretkeybytes(), "ERR_BAD_KEY");
+      ArgumentsEx.check(_m, _c.length - SodiumReactNative.crypto_box_sealbytes(), "ERR_BAD_PLAINTEXT_LENGTH");
+    } catch (Exception e) {
+      throw e;
+    }
+
+    int success = SodiumReactNative.crypto_box_seal_open(_m, _c, _c.length, _pk, _sk);
+    if (success != 0) {
+      Exception e = new Exception("crypto_box_seal_open execution failed");
+      throw e;
+    }
+
+    return ArrayUtil.toWritableArray(_m);
   }
 }
