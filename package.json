@@ -55,13 +55,13 @@
     "android",
     "sodium"
   ],
-  "repository": "https://github.com/pwltr/sodium-react-native",
+  "repository": "https://github.com/synonymdev/sodium-react-native",
   "author": "Philipp Walter <philippwalter@proton.me> (https://github.com/pwltr)",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/pwltr/sodium-react-native/issues"
+    "url": "https://github.com/synonymdev/sodium-react-native/issues"
   },
-  "homepage": "https://github.com/pwltr/sodium-react-native#readme",
+  "homepage": "https://github.com/synonymdev/sodium-react-native#readme",
   "publishConfig": {
     "registry": "https://registry.npmjs.org/"
   },
